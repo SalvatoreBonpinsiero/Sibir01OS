@@ -3,12 +3,14 @@ project(ESP32Dashboard)
 
 set(CMAKE_CXX_STANDARD 20)
 
-
 find_package(glfw3 REQUIRED)
 
-include_directories(imgui imgui/backends)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+)
 
-file(GLOB IMGUI_SOURCES
+set(IMGUI_SOURCES
     imgui/imgui.cpp
     imgui/imgui_draw.cpp
     imgui/imgui_tables.cpp
@@ -18,6 +20,5 @@ file(GLOB IMGUI_SOURCES
 )
 
 add_executable(ESP32Dashboard main.cpp ${IMGUI_SOURCES})
-
 
 target_link_libraries(ESP32Dashboard PRIVATE glfw opengl32 gdi32 user32 shell32 -static)
