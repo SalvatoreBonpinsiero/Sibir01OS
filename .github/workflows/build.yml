@@ -5,7 +5,7 @@ on:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   build:
@@ -25,6 +25,13 @@ jobs:
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-glfw
+
+      - name: Fetch ImGui
+        shell: bash
+        run: |
+          if [ ! -d "imgui" ]; then
+            git clone --depth 1 https://github.com/ocornut/imgui.git imgui
+          fi
 
       - name: Build Project with CMake
         shell: msys2 {0}
