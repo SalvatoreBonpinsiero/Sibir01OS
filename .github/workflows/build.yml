@@ -1,0 +1,40 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup MinGW Toolchain
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            git
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-glfw
+
+      - name: Build Project with CMake
+        shell: msys2 {0}
+        run: |
+          mkdir -p build && cd build
+          cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+          cmake --build . --config Release
+
+      - name: Upload EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ESP32Dashboard-Windows-x64
+          path: build/ESP32Dashboard.exe
