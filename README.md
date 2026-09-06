@@ -1,6 +1,40 @@
-# ⚡ ESP32 DASHBOARD & MOD CONTROLLER
+# ⚡SIBIR 01
+
+<div align="center">
+
+### Стек и технологии
+
+<img src="https://api.iconify.design/logos:c-plusplus.svg" width="36" height="36" alt="C++" /> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://api.iconify.design/simple-icons:espressif.svg" width="36" height="36" alt="ESP32" /> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://api.iconify.design/logos:github-actions.svg" width="36" height="36" alt="GitHub Actions" /> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://api.iconify.design/logos:cmake.svg" width="36" height="36" alt="CMake" /> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://api.iconify.design/logos:opengl.svg" width="36" height="36" alt="OpenGL" />
+
+</div>
+
+---
 
 Центр управления и прошивка для аппаратного контроллера импульсной нагрузки на базе микроконтроллера ESP32. Проект связывает прошивку чипа с десктопным графическим клиентом на C++ (Dear ImGui) для настройки параметров и мониторинга состояния устройства в реальном времени.
+
+### 🔄 Схема работы
+
+[ ПК / C++ GUI ]
+|
+(USB / UART)
+v
++--------------+     I2C (SDA/SCL)     +-------------------+
+| ESP32 DevKit | --------------------> | OLED SSD1306 0.96 |
++--------------+                       +-------------------+
+|
+GPIO 4 (PWM)
+|
+v
++--------------+      Силовая линия     +-------------------+
+| MOSFET Ключ  | --------------------> | Нагрузка/Спираль  |
++--------------+                       +-------------------+
+^                                         ^
+|_________________ [ BAT+ ] ______________|
+
 
 ### ⚙️ Основные возможности
 
@@ -22,4 +56,4 @@
 1. <img src="https://api.iconify.design/lucide:tag.svg" width="16" height="16" /> Перейдите во вкладку [Releases](../../releases) репозитория.
 2. <img src="https://api.iconify.design/lucide:download.svg" width="16" height="16" /> Скачайте актуальную сборку прошивки (`firmware.bin`) и архив с панелью управления (`ESP32Dashboard.exe`).
 3. <img src="https://api.iconify.design/lucide:flame.svg" width="16" height="16" /> Залейте бинарник в контроллер через Web Flasher или esptool.
-4. <img src="https://api.iconify.design/lucide:play.svg" width="16" height="16" /> Подключите плату по USB и запустите `ESP32Dashboard.exe`.
+4. <img src="https://api.iconify.design/lucide:play.svg" width="16" height="16" /> По
